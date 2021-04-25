@@ -20,6 +20,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('users', App\Http\Controllers\UserController::class);
+Route::resource('orders', App\Http\Controllers\OrderController::class)->only(['index', 'store', 'create', 'show']);
 
-Route::resource('orders', App\Http\Controllers\OrderController::class);
+Route::post('orders/{id}/pay', [App\Http\Controllers\OrderController::class, 'pay'])->name('orders.pay');
+
+Route::get('orders/{id}/response-payment', [App\Http\Controllers\OrderController::class, 'response'])->name('orders.response');

@@ -31,6 +31,7 @@ class Order extends Model
     const ORDER_CREATED = 'CREATED';
     const ORDER_PAYED = 'PAYED';
     const ORDER_REJECTED = 'REJECTED';
+    const PRODUCT_VALUE = '25000';
 
     protected $dates = ['deleted_at'];
 
@@ -40,7 +41,10 @@ class Order extends Model
         'customer_name',
         'customer_email',
         'customer_mobile',
+        'amount',
         'status',
+        'payment_id',
+        'payment_url',
         'user_id'
     ];
 
@@ -68,6 +72,7 @@ class Order extends Model
         'customer_email' => 'required|string|max:120',
         'customer_mobile' => 'required|string|max:40',
         'status' => 'nullable|string|max:20',
+        'amount' => 'nullable',
         'user_id' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'
@@ -87,6 +92,7 @@ class Order extends Model
         static::creating(function ($item) {
             $item->user_id = Auth::user()->id;
             $item->status = self::ORDER_CREATED;
+            $item->amount = self::PRODUCT_VALUE;
         });
     }
 }

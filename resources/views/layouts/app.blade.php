@@ -24,7 +24,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/general.css') }}">
 
 </head>
 <body class="app aside-menu-fixed sidebar-lg-show">
@@ -50,11 +49,6 @@
                @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-header text-center">
-                    <strong>Cuenta</strong>
-                </div>
-                <a class="dropdown-item" href="#">
-                    <i class="fa fa-user"></i> Perfil</a>
                 <a href="{{ url('/logout') }}" class="dropdown-item btn btn-default btn-flat"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fa fa-lock"></i>Logout
