@@ -81,7 +81,7 @@ class OrderController extends AppBaseController
     public function show($id)
     {
         $order = $this->orderRepository->find($id);
-        if (Auth::user()->id != $order->user_id)
+        if (Auth::user()->is_customer == 1 && Auth::user()->id != $order->user_id)
         {
             abort(403);
         }

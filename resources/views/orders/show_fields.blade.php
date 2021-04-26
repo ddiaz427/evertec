@@ -22,18 +22,26 @@
     <p>{{ $order->status }}</p>
 </div>
 
-@if($order->status == $order::ORDER_CREATED)
+<!-- Status Field -->
+<div class="form-group">
+    {!! Form::label('status', 'Estado:', ['class' => 'font-weight-bold']) !!}
+    <p>{{ $order->amount }}</p>
+</div>
+
+@if (Auth::user()->is_customer == 1)
+    @if($order->status == $order::ORDER_CREATED)
+        <!-- Submit Field -->
+        <div class="form-group col-sm-12">
+            {!! Form::open(['route' => ['orders.pay', $order->id]]) !!}
+                {!! Form::submit('Realizar pago', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+        </div>
+    @elseif($order->status == $order::ORDER_REJECTED)
     <!-- Submit Field -->
-    <div class="form-group col-sm-12">
-        {!! Form::open(['route' => ['orders.pay', $order->id]]) !!}
-            {!! Form::submit('Realizar pago', ['class' => 'btn btn-primary']) !!}
+    <div class="form-group">
+        {!! Form::open(['url' => $order->payment_url, 'method' => 'get']) !!}
+            {!! Form::submit('Reintentar pago', ['class' => 'btn btn-primary']) !!}
         {!! Form::close() !!}
     </div>
-@elseif($order->status == $order::ORDER_REJECTED)
-<!-- Submit Field -->
-<div class="form-group">
-    {!! Form::open(['url' => $order->payment_url, 'method' => 'get']) !!}
-        {!! Form::submit('Reintentar pago', ['class' => 'btn btn-primary']) !!}
-    {!! Form::close() !!}
-</div>
+    @endif
 @endif
